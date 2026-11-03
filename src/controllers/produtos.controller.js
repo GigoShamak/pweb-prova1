@@ -12,24 +12,37 @@ export class ProdutosController {
     this.service = produtosService;
     this.categoriasService = categoriasService; // para montar o <select> de categorias
     this.index = this.index.bind(this);
-    this.novo =  this.index.bind(this);
-    this.criar - this.criar.bind(this);
+    this.novo = this.novo.bind(this);
+    this.criar = this.criar.bind(this);
   }
 
   async index(req, res, next) {
     try {
-      xx
-
+      res.render('produtos/index', { titulo: 'Produtos', produtos: await this.service.listar() });
     } catch (err) { next(err); }
-
-    // nova {}
   }
 
-  async criar(red, res, next) {
+  async novo(req, res, next) {
     try {
-      xx
+      res.render('produtos/form', { titulo: 'Novo Produto', valores: {}, erros: [], categorias: await this.categoriasService.listar() });
     } catch (err) { next(err); }
-    
   }
 
+  async criar(req, res, next) {
+    try {
+      await this.service.criar(req.body);
+      req.flash('sucesso', 'Produto criado com sucesso.');
+      res.redirect('/produtos');
+    } catch (err) {
+      if (err.status && err.status < 500) {
+        try {
+          return res.status(err.status).render('produtos/form', {
+            titulo: 'Novo Produto', valores: req.body, erros: [err.message],
+            categorias: await this.categoriasService.listar(),
+          });
+        } catch (e) { return next(e); }
+      }
+      next(err);
+    }
+  }
 }
