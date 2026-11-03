@@ -10,5 +10,10 @@ export class CategoriasService {
   constructor(categoriasRepository) {
     this.repo = categoriasRepository;
   }
-  // TODO: criar(dados), listar().
+  async criar({ nome }) {
+
+  }
+  listar() {
+    return this.repo.listar();
+  }
 }
