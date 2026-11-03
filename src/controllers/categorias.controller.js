@@ -16,18 +16,24 @@ export class CategoriasController {
 
   async index(req, res, next) {
     try {
-      xx
-
+      res.render('categorias/index', { titulo: 'Categorias', categorias: await this.service.listar() });
     } catch (err) { next(err); }
-
-    // nova {}
   }
 
-  async criar(red, res, next) {
+  nova(req, res) {
+    res.render('categorias/form', { titulo: 'Nova Categoria', valores: {}, erros: [] });
+  }
+
+  async criar(req, res, next) {
     try {
-      xx
-    } catch (err) { next(err); }
-    
+      await this.service.criar(req.body);
+      req.flash('sucesso', 'Categoria criada com sucesso.');
+      res.redirect('/categorias');
+    } catch (err) {
+      if (err.status && err.status < 500) {
+        return res.status(err.status).render('categorias/form', { titulo: 'Nova Categoria', valores: req.body, erros: [err.message] });
+      }
+      next(err);
+    }
   }
-
 }
