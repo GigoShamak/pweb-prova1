@@ -15,5 +15,11 @@ export class ProdutosService {
     this.repo = produtosRepository;
     this.categoriasRepo = categoriasRepository; // para checar se a categoria existe
   }
-  // TODO: criar(dados), listar().
+  async criar({ nome, preco, categoriaId }) {
+    //nome obrigatório
+    //preço maior que 0
+  }
+  listar() {
+    return this.repo.listar();
+  }
 }
