@@ -11,7 +11,25 @@ export class ProdutosController {
   constructor(produtosService, categoriasService) {
     this.service = produtosService;
     this.categoriasService = categoriasService; // para montar o <select> de categorias
-    // Dica: "amarre" o this dos métodos usados como callback nas rotas.
+    this.index = this.index.bind(this);
+    this.novo =  this.index.bind(this);
+    this.criar - this.criar.bind(this);
   }
-  // TODO: implemente index, novo, criar.
+
+  async index(req, res, next) {
+    try {
+      xx
+
+    } catch (err) { next(err); }
+
+    // nova {}
+  }
+
+  async criar(red, res, next) {
+    try {
+      xx
+    } catch (err) { next(err); }
+    
+  }
+
 }

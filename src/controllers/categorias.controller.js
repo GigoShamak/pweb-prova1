@@ -9,7 +9,25 @@
 export class CategoriasController {
   constructor(categoriasService) {
     this.service = categoriasService;
-    // Dica: "amarre" o this dos métodos usados como callback nas rotas.
+    this.index = this.index.bind(this);
+    this.nova = this.nova.bind(this);
+    this.criar = this.criar.bind(this);
   }
-  // TODO: implemente index, nova, criar.
+
+  async index(req, res, next) {
+    try {
+      xx
+
+    } catch (err) { next(err); }
+
+    // nova {}
+  }
+
+  async criar(red, res, next) {
+    try {
+      xx
+    } catch (err) { next(err); }
+    
+  }
+
 }
